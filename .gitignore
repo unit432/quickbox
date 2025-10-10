@@ -1,6 +1,21 @@
+# STRATEGY: IGNORE EVERYTHING, THEN WHITELIST
+
+# STEP 1: IGNORE EVERYTHING
 *
 
-!.gitignore
+# STEP 2: UNIGNORE DIRECTORY STRUCTURE (so Git can traverse folders)
+!*/
+
+# STEP 3: WHITELIST SPECIFIC CONFIG FILES
 !.tmux.conf
-!.config/
-!.config/nvim/init.lua
+!.config/nvim/**
+
+# STEP 4: WHITELIST GIT REPOSITORY FILES (important!)
+!.gitignore
+!README.md
+!LICENSE
+
+# STEP 5: IGNORE OS JUNK (redundant but safe)
+.DS_Store
+*.swp
+*.swo
