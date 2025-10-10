@@ -19,3 +19,12 @@
 .DS_Store
 *.swp
 *.swo
+.config/nvim/lazy-lock.json
+tmp/
+project/
+Pictures/
+Desktop/
+.Trash/
+Documents/
+homebrew/
+Library/
