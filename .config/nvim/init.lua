@@ -74,3 +74,8 @@ vim.keymap.set("n", "<leader>bl", ":b#<CR>", { desc = "Last buffer" })
 
 -- Open Lazy
 vim.keymap.set("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
+
+-- git gitsigns
+vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#FF69B4" })
+vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#800080" })
+vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#FF0000" })
