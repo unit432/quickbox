@@ -4,6 +4,8 @@ return {
     local alpha = require'alpha'
     local dashboard = require'alpha.themes.dashboard'
 
+    vim.cmd("colorscheme tokyonight")
+
     -- Set the custom header (ASCII Art or custom text)
     dashboard.section.header.val = {
       "   ____  _   _          ____    ____ ____ ",
