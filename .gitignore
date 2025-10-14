@@ -28,3 +28,7 @@ Desktop/
 Documents/
 homebrew/
 Library/
+.vim/
+.rbenv/
+.gem/
+.oh-my-zsh/
