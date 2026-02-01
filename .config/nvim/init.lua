@@ -22,15 +22,10 @@ require("lazy").setup("plugins")
 vim.o.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"
 
 -- Customize cursor color to black (you can adjust this to any color you prefer)
-vim.api.nvim_set_hl(0, "Cursor", { fg = "black", bg = "none" })
--- Enable Cursor Blink and set cursor style
-vim.o.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"
-
--- Customize cursor color to black (you can adjust this to any color you prefer)
-vim.api.nvim_set_hl(0, "Cursor", { fg = "black", bg = "none" })
+vim.api.nvim_set_hl(0, "Cursor", { fg = "red", bg = "none" })
 
 -- Other Config
-vim.o.mouse = ""
+-- vim.o.mouse = ""
 
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
