@@ -1,90 +1,53 @@
--- 1. Bootstrap lazy.nvim (auto-install if missing)
+-- 1. Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
 vim.opt.rtp:prepend(lazypath)
 
--- 2. Set leader key
+-- 2. Global Options (Must be set before loading plugins)
 vim.g.mapleader = " "
+vim.g.copilot_no_tab_map = true -- Set this BEFORE loading plugins
 
 -- 3. Load Plugins
 require("lazy").setup("plugins")
 
--- Enable Cursor Blink and set cursor style
-vim.o.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"
-
--- Customize cursor color to black (you can adjust this to any color you prefer)
+-- 4. UI & Editor Settings
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.api.nvim_set_hl(0, "Cursor", { fg = "red", bg = "none" })
-
--- Other Config
--- vim.o.mouse = ""
-
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
+vim.opt.number = true
+vim.opt.termguicolors = true
+vim.opt.backspace = 'indent,eol,start'
+vim.opt.autoindent = true
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
 
--- Show line numbers
-vim.o.number = true
-
--- Enable True Color
-vim.o.termguicolors = true
-
--- Set file encoding to UTF-8
-vim.o.encoding = 'utf-8'
-
--- Configure backspace behavior
-vim.o.backspace = 'indent,eol,start'
-
--- Enable auto-indentation
-vim.o.autoindent = true
-
--- Set number of spaces for indentation
-vim.o.shiftwidth = 2
-
--- Set number of spaces for a tab
-vim.o.softtabstop = 2
-
--- Use spaces instead of tabs
-vim.o.expandtab = true
-
--- Set space as the leader key
-vim.g.mapleader = " "
-
--- Keybindings
--- Telescope keybindings
-vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Find files" })  -- File search
-vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "Live grep" })   -- Text search
-vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Find buffers" }) -- Open buffers
-vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Find help" })  -- Help tags
-vim.keymap.set("n", "<leader>fo", ":Telescope oldfiles<CR>", { desc = "Find recent files" }) -- A list of recent files
-
--- Go to the next buffer
-vim.keymap.set("n", "]b", ":bnext<CR>", { desc = "Next buffer" })
-
--- Go to the previous buffer
-vim.keymap.set("n", "[b", ":bprevious<CR>", { desc = "Previous buffer" })
-
--- Close the current buffer
-vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
-
--- Reopen the last buffer
-vim.keymap.set("n", "<leader>bl", ":b#<CR>", { desc = "Last buffer" })
-
--- Open Lazy
-vim.keymap.set("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
-
--- git gitsigns
+-- 5. GitSigns Colors (Pink/Purple theme)
 vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#FF69B4" })
 vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#800080" })
 vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#FF0000" })
 
--- Copilot keybindings
-vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+-- 6. Keybindings
+local map = vim.keymap.set
+
+-- Copilot: Corrected Accept Mapping (Ctrl+J)
+-- replace_keycodes = false is essential for the ghost text to accept correctly
+map("i", "<C-j>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, desc = "Copilot Accept" })
+
+-- Telescope
+map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live grep" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find buffers" })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files" })
+
+-- Buffer Navigation
+map("n", "]b", ":bnext<CR>", { desc = "Next buffer" })
+map("n", "[b", ":bprevious<CR>", { desc = "Previous buffer" })
+map("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
+map("n", "<leader>bl", ":b#<CR>", { desc = "Last buffer" })
+
+-- Utils
+map("n", "<leader>pl", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
