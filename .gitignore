@@ -1,34 +1,22 @@
-# STRATEGY: IGNORE EVERYTHING, THEN WHITELIST
-
-# STEP 1: IGNORE EVERYTHING
+# 1. Ignore everything
 *
 
-# STEP 2: UNIGNORE DIRECTORY STRUCTURE (so Git can traverse folders)
-!*/
-
-# STEP 3: WHITELIST SPECIFIC CONFIG FILES
-!.tmux.conf
-!.config/nvim/**
-
-# STEP 4: WHITELIST GIT REPOSITORY FILES (important!)
+# 2. Allow the .gitignore itself and documentation
 !.gitignore
 !README.md
 !LICENSE
 
-# STEP 5: IGNORE OS JUNK (redundant but safe)
-.DS_Store
+# 3. Whitelist specific files in the Home root
+!.tmux.conf
+
+# 4. Whitelist the nvim directory specifically
+# We unignore the folder, then everything inside it
+!.config/
+!.config/nvim/
+!.config/nvim/**
+
+# 5. Re-ignore specific junk inside whitelisted folders
+.config/nvim/lazy-lock.json
 *.swp
 *.swo
-.config/nvim/lazy-lock.json
-tmp/
-project/
-Pictures/
-Desktop/
-.Trash/
-Documents/
-homebrew/
-Library/
-.vim/
-.rbenv/
-.gem/
-.oh-my-zsh/
+.DS_Store
