@@ -84,3 +84,7 @@ vim.keymap.set("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
 vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#FF69B4" })
 vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#800080" })
 vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#FF0000" })
+
+-- Copilot keybindings
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })

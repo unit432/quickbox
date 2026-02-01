@@ -3,40 +3,38 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
+    "hrsh7th/nvim-cmp", -- Optional: for autocompletion in chat
+    "nvim-telescope/telescope.nvim", -- Optional: for file/buffer picking
     { "github/copilot.vim" }, -- Optional: for ghost text autocomplete
   },
-  -- This table is passed to require("codecompanion").setup(opts)
   opts = {
     strategies = {
-      chat = {
-        adapter = "gemini",
-      },
-      inline = {
-        adapter = "gemini",
-      },
+      chat = { adapter = "gemini" },
+      inline = { adapter = "gemini" },
+      agent = { adapter = "gemini" },
     },
     adapters = {
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
-          env = {
-            api_key = "GEMINI_API_KEY",
-          },
+          env = { api_key = "GEMINI_API_KEY" },
           schema = {
-            model = {
-              default = "gemini-2.0-flash",
-            },
+            model = { default = "gemini-2.0-flash" },
+            temperature = { default = 0.2 },
           },
         })
       end,
     },
-    opts = {
-      log_level = "DEBUG",
+    display = {
+      chat = {
+        show_settings = true, -- Shows model info at the top of the chat
+        render_headers = false, -- Cleaner look if you use a markdown plugin
+      },
     },
   },
-  -- Adding keymaps so you can actually open the interface
   keys = {
-    { "<leader>ca", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "CodeCompanion Actions" },
-    { "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Chat" },
-    { "ga", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "Add code to CodeCompanion" },
+    { "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "Toggle AI Chat" },
+    { "<leader>ca", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "AI Actions" },
+    { "ga", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "Add code to Chat" },
+    { "<leader>ci", "<cmd>CodeCompanion<cr>", mode = "n", desc = "Inline Prompt" },
   },
 }
