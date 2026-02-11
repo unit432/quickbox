@@ -10,7 +10,7 @@ return {
       scss = { "prettierd", "prettier", stop_after_first = true },
       
       -- Ruby & Templates
-      ruby = { "standardrb", "rubocop" },
+      -- ruby = { "standardrb", "rubocop" },
       haml = { "haml_lint" }, -- Note: haml-lint is the standard for HAML
       
       -- PHP
