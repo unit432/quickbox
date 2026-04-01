@@ -3,13 +3,17 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      -- Helper for Copilot.vim (Vimscript version) status
+      -- Helper for copilot.lua status
       local function copilot_status()
-        local status = vim.fn['copilot#Enabled']()
-        if status == 1 then
-          return " " -- Active icon
+        local ok, api = pcall(require, "copilot.api")
+        if not ok then return "" end
+        local status = api.status.data.status
+        if status == "Normal" then
+          return " "
+        elseif status == "InProgress" then
+          return " " -- You could add a spinner here
         else
-          return " " -- Disabled icon
+          return " "
         end
       end
 
