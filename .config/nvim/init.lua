@@ -7,7 +7,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- 2. Global Options (Must be set before loading plugins)
 vim.g.mapleader = " "
-vim.g.copilot_no_tab_map = true -- Set this BEFORE loading plugins
 
 -- 3. Load Plugins
 require("lazy").setup("plugins")
@@ -32,10 +31,6 @@ vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#FF0000" })
 
 -- 6. Keybindings
 local map = vim.keymap.set
-
--- Copilot: Corrected Accept Mapping (Ctrl+J)
--- replace_keycodes = false is essential for the ghost text to accept correctly
-map("i", "<C-j>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, desc = "Copilot Accept" })
 
 -- Telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
