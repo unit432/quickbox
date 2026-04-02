@@ -20,7 +20,6 @@ return {
       dashboard.button("o", "󰄉  Recent Files", ":Telescope oldfiles<CR>"),
       dashboard.button("f", "  Find File", ":Telescope find_files<CR>"),
       dashboard.button("g", "󰱽  Find Text", ":Telescope live_grep<CR>"),
-      dashboard.button("p", "󰉋  Projects", ":Telescope projects<CR>"),
     }
 
     -- Footer: Optional, shows how many plugins you have loaded
