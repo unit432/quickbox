@@ -7,11 +7,12 @@ return {
   config = function()
     -- Treesitter configuration
     require("nvim-treesitter.configs").setup {
-      ensure_installed = { "ruby", "html", "javascript", "css", "scss", "lua", "json" }, -- Add all your languages
+      ensure_installed = { "ruby", "html", "javascript", "css", "scss", "lua", "json", "elixir", "heex", "eex" }, -- Add all your languages
       sync_install = false, -- Install languages asynchronously
       auto_install = true, -- Automatically install missing parsers
       highlight = {
-        enable = true, -- Enable syntax highlighting
+        enable = true,
+        disable = { "markdown", "markdown_inline" },
         additional_vim_regex_highlighting = false,
       },
       indent = { enable = true }, -- Enable smart indentation

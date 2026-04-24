@@ -11,7 +11,24 @@ vim.g.mapleader = " "
 -- 3. Load Plugins
 require("lazy").setup("plugins")
 
--- 4. UI & Editor Settings
+-- 4a. Disable treesitter for markdown (Neovim 0.12.x nil node bug)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.treesitter.stop()
+  end,
+})
+
+-- 4. Filetype Associations
+vim.filetype.add({
+  extension = {
+    heex = "heex",
+    eex  = "eex",
+    exs  = "elixir",
+  },
+})
+
+-- 5. UI & Editor Settings
 vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.api.nvim_set_hl(0, "Cursor", { fg = "red", bg = "none" })
 vim.opt.cursorline = true
@@ -24,12 +41,12 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
--- 5. GitSigns Colors (Pink/Purple theme)
+-- 6. GitSigns Colors (Pink/Purple theme)
 vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#FF69B4" })
 vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#800080" })
 vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#FF0000" })
 
--- 6. Keybindings
+-- 7. Keybindings
 local map = vim.keymap.set
 
 -- Telescope
